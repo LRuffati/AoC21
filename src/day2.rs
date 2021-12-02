@@ -34,7 +34,9 @@ impl Command {
     }
 }
 
-impl Position {
+impl Add<Command> for Position {
+    type Output = Self;
+
     fn add(self, rhs: Command) -> Self {
         match rhs {
             Forward(x) => Position {forward: self.forward+x, ..self},
@@ -42,8 +44,12 @@ impl Position {
             Down(x) => Position {depth: self.depth+x, ..self},
         }
     }
+}
 
-    fn add2(self, rhs: Command) -> Self {
+impl std::ops::Mul<Command> for Position {
+    type Output = Self;
+
+    fn mul(self, rhs: Command) -> Self {
         match rhs {
             Forward(x) => {
                 let f = self.forward + x;
@@ -60,7 +66,14 @@ pub fn solve_a(input: BufReader<File>) {
     let re: Regex = Regex::new(r"(?:(forward)|(down)|(up)) ([0-9]+)").unwrap();
     let final_p: Position = input.lines()
         .map(|line| Command::parse(line.unwrap(), &re))
-        .fold(Position{depth: 0, forward: 0, aim: 0}, |p, c| p.add2(c));
+        .fold(Position{depth: 0, forward: 0, aim: 0}, |p, c| p + c);
     println!("{}", final_p.forward*final_p.depth)
 }
 
+pub fn solve_b(input: BufReader<File>) {
+    let re: Regex = Regex::new(r"(?:(forward)|(down)|(up)) ([0-9]+)").unwrap();
+    let final_p: Position = input.lines()
+        .map(|line| Command::parse(line.unwrap(), &re))
+        .fold(Position{depth: 0, forward: 0, aim: 0}, |p, c| p * c);
+    println!("{}", final_p.forward*final_p.depth)
+}
