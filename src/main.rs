@@ -8,7 +8,7 @@ use days::*;
 
 
 fn main() {
-    let file = File::open("inputs/03a").expect("Can't find file");
+    let file = File::open("inputs/04").expect("Can't find file");
     let reader = BufReader::new(file);
     //let input: String = fs::read_to_string("inputs/01a").unwrap();
     solve_b(reader);

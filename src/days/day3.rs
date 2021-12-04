@@ -109,7 +109,7 @@ pub fn solve_b(input: BufReader<File>) {
         for i in high_vec{
             sorter.add(i);
         }
-        let (mut h, _) = sorter.split();
+        let (h, _) = sorter.split();
         high_vec = h;
     }
     high = high_vec.pop().unwrap().1;
@@ -120,7 +120,7 @@ pub fn solve_b(input: BufReader<File>) {
         for i in low_vec{
             sorter.add(i);
         }
-        let (_, mut l) = sorter.split();
+        let (_, l) = sorter.split();
         low_vec = l;
     }
     low = low_vec.pop().unwrap().1;
