@@ -1,2 +1,4 @@
 mod day5;
-pub use day5::solution::solve_a;
+mod day6;
+
+pub use day6::*;
